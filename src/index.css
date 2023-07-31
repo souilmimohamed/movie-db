@@ -1,13 +1,263 @@
-body {
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  outline: none;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+body {
+  color: #fff;
+  background-color: #212121;
+  padding: 1.5rem;
+}
+
+.search-box {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  align-items: center;
+  margin: 15px 0 30px 0;
+}
+
+.form {
+  display: flex;
+  max-width: 400px;
+}
+
+.search-box input {
+  width: 100%;
+  max-width: 400px;
+  padding: 8px;
+  border-radius: 0.4rem 0 0 0.4rem;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.search-box .search-btn {
+  width: 120px;
+  background-color: #01579b;
+  color: #fff;
+  cursor: pointer;
+  padding: 6px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0 0.4rem 0.4rem 0;
+  transition: all 0.5s ease;
+}
+
+.search-box .search-btn:hover {
+  background-color: #0091ea;
+  border: 1px solid #fff;
+}
+
+.container {
+  width: 100%;
+  max-height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container .card {
+  position: relative;
+  font-size: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 0.4rem;
+  line-height: 20px;
+  width: 285px;
+  height: 360px;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.container .card .card-content {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 100px 10px 5px;
+  background-image: linear-gradient(
+    180deg,
+    rgba(51, 55, 69, 0),
+    rgba(15, 21, 40, 0.95)
+  );
+  transition: all 0.5s ease;
+}
+
+.container .card .card-content .card-header {
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.container .card .card-content .card-btn {
+  color: #fff;
+  cursor: pointer;
+  padding: 6px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.4rem;
+  transition: all 0.5s ease;
+}
+
+.container .card .card-content .info {
+  max-height: 0;
+  opacity: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.container .card:hover {
+  cursor: pointer;
+}
+
+.container .card:hover .card-content {
+  background-image: linear-gradient(180deg, rgba(51, 55, 69, 0), #101528 48%);
+}
+
+.container .card:hover .card-btn {
+  background-color: #0091ea;
+  border-color: #0091ea;
+}
+
+.container .card:hover .info {
+  max-height: 200px;
+  opacity: 1;
+  padding: 8px 0;
+}
+
+.result {
+  display: flex;
+
+  gap: 15px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media screen and (max-width: 550px) {
+  .search-box {
+    justify-content: center;
+  }
+  .form {
+    margin-top: 10px;
+  }
+}
+.loader-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  background: transparent;
+  z-index: 1;
+}
+
+.spinner {
+  width: 64px;
+  height: 64px;
+  border: 8px solid;
+  border-color: #fff transparent #fff transparent;
+  border-radius: 50%;
+  animation: spin-anim 1.2s linear infinite;
+}
+
+@keyframes spin-anim {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.type {
+  display: flex;
+  justify-content: space-between;
+}
+
+.type button {
+  margin-right: 1rem;
+  background-color: #01579b;
+  color: #fff;
+  cursor: pointer;
+  padding: 6px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.4rem;
+  transition: all 0.5s ease;
+}
+.type button:hover {
+  background-color: #0091ea;
+  border: 1px solid #fff;
+}
+
+.selected {
+  box-shadow: 0.2rem 0.2rem 0.2rem #fff;
+}
+.genre-select {
+  padding: 6px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.4rem;
+  background-color: #01579b;
+  color: #fff;
+  text-align: center;
+}
+.chip {
+  display: inline-flex;
+  flex-direction: row;
+  background-color: #01579b;
+  border: none;
+  cursor: default;
+  height: 36px;
+  outline: none;
+  padding: 0;
+  font-size: 14px;
+  font-color: #333333;
+  font-family: "Open Sans", sans-serif;
+  white-space: nowrap;
+  align-items: center;
+  border-radius: 16px;
+  vertical-align: middle;
+  text-decoration: none;
+  justify-content: center;
+  margin-right: 0.2rem;
+}
+.chip-content {
+  cursor: inherit;
+  display: flex;
+  align-items: center;
+  user-select: none;
+  white-space: nowrap;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.chip-svg {
+  color: #999999;
+  cursor: pointer;
+  height: auto;
+  margin: 4px 4px 0 -8px;
+  fill: currentColor;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  font-size: 24px;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  user-select: none;
+  flex-shrink: 0;
+}
+.chip-svg:hover {
+  color: #666666;
+}
+.seleted-genres {
+  margin-bottom: 0.5rem;
 }
