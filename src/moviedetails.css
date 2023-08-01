@@ -180,44 +180,12 @@ p {
   object-fit: contain;
 }
 
-.trailers-list {
-  margin-top: 40px;
-  padding: 20px 0;
-  text-align: center;
-}
-
-.trailers-list h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.trailers {
-  list-style-type: none;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.trailer {
-  margin: 10px;
-}
-
-.trailer a {
+.title {
   display: inline-block;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #007bff;
+  margin-right: 10px;
+  font-size: 14px;
+  background-color: #444;
   color: #fff;
-  text-decoration: none;
+  padding: 5px 10px;
   border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.trailer a:hover {
-  background-color: #0056b3;
-}
-.video-link {
-  cursor: pointer;
 }

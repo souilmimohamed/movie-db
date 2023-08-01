@@ -9,6 +9,7 @@ export interface movie {
   production_companies: productionCompany[];
   budget: number;
   revenue: number;
+  runtime: number;
 }
 
 export interface tvShow {
@@ -34,6 +35,7 @@ export interface castMember {
   name: string;
   character: string;
   profile_path: string;
+  job: string;
 }
 
 export interface genre {

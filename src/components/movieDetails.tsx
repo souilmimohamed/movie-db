@@ -9,6 +9,7 @@ import { imgApi } from "../constants";
 import { fetchById, fetchCast } from "../redux/slices";
 import CastMemberCard from "./castMemeberCard";
 import ProdCompany from "./productionCompany";
+import { timeConvert } from "../shared/helpers";
 const MoviesDetails = () => {
   type MovieParams = {
     id: string;
@@ -16,6 +17,7 @@ const MoviesDetails = () => {
   const { id } = useParams<MovieParams>();
   const movie = useSelector((state: RootState) => state.movies.singleMovie);
   const cast = useSelector((state: RootState) => state.movies.cast);
+  const crew = useSelector((state: RootState) => state.movies.crew);
   const dispatch = useDispatch<AppDispatch>();
   const type = useSelector((state: RootState) => state.utils.type);
   const castListRef = useRef<HTMLDivElement>(null);
@@ -54,17 +56,35 @@ const MoviesDetails = () => {
           <p>{movie.overview}</p>
           <p className="release-date">Release Date: {movie.release_date}</p>
           <div className="genres-list">
-            <p className="genres-label">Genres:</p>
             <ul className="genres">
               {movie?.genres?.map((genre, index) => (
                 <li key={index}>{genre.name}</li>
               ))}
             </ul>
           </div>
-          <span>Budget: {movie.budget.toLocaleString("en-US")}$</span>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <span>Revenue: {movie.revenue.toLocaleString("en-US")}$</span>
-          <p className="cast-title">CAST</p>
+          <br />
+          <span>
+            <p className="title">Budget:</p>
+            {movie.budget.toLocaleString("en-US")}$&nbsp;&nbsp;
+            <p className="title">Revenue:</p>
+            {movie.revenue.toLocaleString("en-US")}$&nbsp;&nbsp;
+            <p className="title">Duration:</p>
+            {timeConvert(movie.runtime)}
+          </span>
+          <br />
+          <br />
+          <span>
+            <p className="title">Director:</p>
+            {crew?.filter((item) => item.job === "Director")[0]?.name}
+          </span>
+          <br />
+          <span>
+            <p className="title">Producers:</p>
+            {crew
+              ?.filter((item) => item.job === "Producer")
+              .map((p) => p.name)
+              .join(" , ")}
+          </span>
           <div className="cast-list" ref={castListRef}>
             {cast?.map((member, key) => (
               <CastMemberCard member={member} key={key} />

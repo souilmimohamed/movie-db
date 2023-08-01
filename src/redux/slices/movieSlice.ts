@@ -22,6 +22,7 @@ export interface moviesState {
   singleMovie: movie;
   singleShow: tvShow;
   cast: castMember[];
+  crew: castMember[];
   genres: genre[];
   hasMore: boolean;
 }
@@ -42,6 +43,7 @@ const initialState = {
     production_companies: [],
     budget: 0,
     revenue: 0,
+    runtime: 0,
   },
   singleShow: {
     first_air_date: "",
@@ -55,6 +57,7 @@ const initialState = {
     production_companies: [],
   },
   cast: [],
+  crew: [],
   trailer: {
     id: "",
     key: "",
@@ -128,6 +131,9 @@ const movieSlice = createSlice({
     });
     builder.addCase(fetchCast.fulfilled, (state: moviesState, action) => {
       state.cast = action.payload.cast;
+      state.crew = action.payload.crew.filter((item: any) => {
+        return item.job === "Director" || item.job === "Producer";
+      });
     });
     builder.addCase(fetchGenres.fulfilled, (state: moviesState, action) => {
       state.genres = action.payload.genres;
